@@ -1,14 +1,15 @@
-// src/routes/userRoutes.ts
-import { Router, Request, Response } from "express";
+import express, { Request, Response } from "express";
+import { UserController } from "../controllers/user.controller";
 
-const router = Router();
-
-router.post("/createUser", (req: Request, res: Response) => {
-  res.status(200).json({
-    message: "A rota foi chamada com sucesso!",
-    data: req.body,
-  });
-  // UserController.create(req, res);
+const router = express.Router();
+const userController = new UserController();
+router.post("/users", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const newUser = await userController.createUser(req, res);
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao criar usuário." });
+  }
 });
 
 export default router;
