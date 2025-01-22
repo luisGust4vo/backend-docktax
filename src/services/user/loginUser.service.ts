@@ -1,22 +1,17 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 const SECRET_KEY = process.env.SECRET_KEY || "sua_chave_secreta";
 
-interface User {
-  id: number;
-  email: string;
-  password: string;
-}
-
 export class LoginUserService {
-  private mockUsers: User[] = [
-    { id: 1, email: "teste@example.com", password: "$2b$10$..." }, // Substitua pelo hash real
-  ];
-
   async authenticateUser(email: string, password: string): Promise<string> {
-    // Verificar se o usuário existe
-    const user = this.mockUsers.find((user) => user.email === email);
+    // Verificar se o usuário existe no banco de dados
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
     if (!user) {
       throw { status: 404, message: "Usuário não encontrado." };
     }
