@@ -1,5 +1,6 @@
 # Projeto Backend com JWT e Prisma
 
+![Node.js Logo](https://nodejs.org/static/images/logos/nodejs-identity.svg)
 Este projeto backend foi desenvolvido com **Node.js**, **Express**, **TypeScript**, **Prisma**, **JWT** (JSON Web Token), **bcrypt** para segurança, e **dotenv** para gerenciamento de variáveis de ambiente. Ele serve como base para APIs seguras com autenticação baseada em tokens.
 
 ## 🚀 Tecnologias e Dependências
