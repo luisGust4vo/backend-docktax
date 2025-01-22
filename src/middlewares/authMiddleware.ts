@@ -1,15 +1,25 @@
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+
+const SECRET_KEY = process.env.SECRET_KEY || "sua_chave_secreta";
 
 export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  // Sua lógica de autenticação
-  const token = req.headers["authorization"];
+): void => {
+  const token = req.headers.authorization?.split(" ")[1]; // Formato: "Bearer TOKEN"
+
   if (!token) {
-    return res.status(401).json({ message: "Token de autenticação ausente" });
+    res.status(401).json({ error: "Token não fornecido." });
+    return;
   }
-  // Validação do token (ex: JWT)
-  next();
+
+  try {
+    const payload = jwt.verify(token, SECRET_KEY) as { id: number };
+    req.user = payload; // Armazena o ID do usuário na requisição
+    next();
+  } catch (error) {
+    res.status(401).json({ error: "Token inválido." });
+  }
 };
