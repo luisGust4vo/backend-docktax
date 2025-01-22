@@ -26,11 +26,10 @@ router.post("/login", async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-// Rota protegida
-// router.get("/protected", authMiddleware, (req, res) => {
-//   res
-//     .status(200)
-//     .json({ message: "Rota protegida acessada com sucesso.", user: req.user });
-// });
+// Rota protegida (precisa de autenticação)
+router.get("/profile", authMiddleware, (req, res) => {
+  // A partir daqui, você pode acessar o `req.user` que contém o ID do usuário
+  res.json({ message: "Bem-vindo ao seu perfil." });
+});
 
 export default router;

@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+interface CustomRequest extends Request {
+  user?: { id: number };
+}
 const SECRET_KEY = process.env.SECRET_KEY || "sua_chave_secreta";
 
 export const authMiddleware = (
-  req: Request,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ): void => {
