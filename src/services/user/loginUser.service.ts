@@ -24,6 +24,7 @@ export class LoginUserService {
 
     // Gerar token JWT
     const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: "1d" });
+    console.log(token);
     return token;
   }
 }
