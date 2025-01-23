@@ -10,9 +10,4 @@ export const createUserSchema = Joi.object({
     "string.email": "O email deve ser válido.",
     "any.required": "O campo email é obrigatório.",
   }),
-  age: Joi.number().greater(17).required().messages({
-    "number.base": "A idade deve ser um número.",
-    "number.greater": "A idade deve ser maior que 17 anos.",
-    "any.required": "O campo idade é obrigatório.",
-  }),
 });
