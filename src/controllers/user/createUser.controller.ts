@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserDTO } from "../../dtos/create-user.dto";
+import { CreateUserInterface } from "../../interfaces/create-user.interface";
 import { UserService } from "../../services/user/createUser.service";
 
 export class UserController {
@@ -7,7 +7,7 @@ export class UserController {
 
   // Função de criação de usuário
   async createUser(req: Request, res: Response): Promise<Response> {
-    const { email, password, name }: CreateUserDTO = req.body;
+    const { email, password, name }: CreateUserInterface = req.body;
 
     // Verificar se o email e a senha foram fornecidos
     if (!email || !email.trim() || !password || !password.trim()) {

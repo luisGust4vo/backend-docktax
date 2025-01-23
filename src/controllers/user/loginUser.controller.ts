@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { LoginUserService } from "../../services/user/loginUser.service";
-import { CreateUserDTO } from "../../dtos/create-user.dto";
+import { CreateUserInterface } from "../../interfaces/create-user.interface";
 
 export class LoginUserController {
   private userService: LoginUserService;
@@ -8,7 +8,7 @@ export class LoginUserController {
     this.userService = new LoginUserService();
   }
   async login(req: Request, res: Response): Promise<Response> {
-    const { email, password }: CreateUserDTO = req.body;
+    const { email, password }: CreateUserInterface = req.body;
     if (!email || !email.trim() || !password || !password.trim()) {
       return res.status(400).json({ error: "Email e senha são obrigatórios." });
     }
