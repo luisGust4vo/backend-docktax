@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { CreateUserDTO } from "../../dtos/create-user.dto";
+import { CreateUserInterface } from "../../interfaces/create-user.interface";
 
 const prisma = new PrismaClient();
 export class UserService {
-  async createUser(data: CreateUserDTO) {
+  async createUser(data: CreateUserInterface) {
     const { email, name, password } = data;
 
     const existingUser = await prisma.user.findUnique({
