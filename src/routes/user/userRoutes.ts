@@ -18,7 +18,6 @@ router.post(
         user: newUser, // Retornando o usuário criado na resposta
       });
     } catch (error) {
-      console.error(error); // Ajuda a depurar qualquer erro
       res.status(500).json({ error: "Erro ao criar usuário." });
     }
   }
@@ -39,7 +38,6 @@ router.get("/profile", authMiddleware, (req, res) => {
 });
 
 router.post("/test", async (req: Request, res: Response): Promise<void> => {
-  console.log(req.body); // Aqui você verá o que está chegando no corpo
   res.json({ message: "Recebido", data: req.body });
 });
 
