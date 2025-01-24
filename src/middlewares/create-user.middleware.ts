@@ -10,15 +10,6 @@ const validateCreateUser = (
   const { error } = createUserSchema.validate(req.body, { abortEarly: false });
 
   if (error) {
-    console.log(
-      "Erros de validação:",
-      error.details.map((err) => err.message)
-    );
-  } else {
-    console.log("Validação bem-sucedida!");
-  }
-
-  if (error) {
     const errors = error.details.map((err) => ({
       message: err.message,
       path: err.path,
