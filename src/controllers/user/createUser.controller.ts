@@ -7,7 +7,8 @@ export class UserController {
 
   // Função de criação de usuário
   async createUser(req: Request, res: Response): Promise<Response> {
-    const { email, password, name }: CreateUserInterface = req.body;
+    const { email, password, name, confirmPassword }: CreateUserInterface =
+      req.body;
 
     // Verificar se o email e a senha foram fornecidos
     if (!email || !email.trim() || !password || !password.trim()) {
@@ -16,7 +17,12 @@ export class UserController {
 
     try {
       // Criar o novo usuário
-      const user = await this.userService.createUser({ email, password, name });
+      const user = await this.userService.createUser({
+        email,
+        password,
+        name,
+        confirmPassword,
+      });
       return res.status(201).json(user); // Retorna o usuário criado com status 201
     } catch (error: unknown) {
       // Garantir que o erro tem uma propriedade 'message'

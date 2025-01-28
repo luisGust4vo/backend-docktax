@@ -11,6 +11,8 @@ router.post(
   "/createUser",
   validateCreateUser,
   async (req: Request, res: Response): Promise<void> => {
+    console.log("Requisição recebida:", req.body); // Log dos dados enviados
+
     try {
       const newUser = await userController.createUser(req, res);
       res.status(201).json({
@@ -18,6 +20,7 @@ router.post(
         user: newUser, // Retornando o usuário criado na resposta
       });
     } catch (error) {
+      console.error("Erro ao criar usuário:", error); // Log de erro
       res.status(500).json({ error: "Erro ao criar usuário." });
     }
   }
