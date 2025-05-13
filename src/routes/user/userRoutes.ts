@@ -8,7 +8,7 @@ const userController = new UserController();
 const loginUser = new LoginUserController();
 
 router.post(
-  "/createUser",
+  "/create",
   validateCreateUser,
   async (req: Request, res: Response): Promise<void> => {
     try {
