@@ -11,8 +11,6 @@ router.post(
   "/createUser",
   validateCreateUser,
   async (req: Request, res: Response): Promise<void> => {
-    console.log("Requisição recebida:", req.body); // Log dos dados enviados
-
     try {
       const newUser = await userController.createUser(req, res);
       res.status(201).json({
